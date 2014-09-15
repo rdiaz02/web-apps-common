@@ -7,6 +7,12 @@ import time
 import fcntl
 import os
 
+ROOT_APPS_DIR = "/web-apps"
+web_apps_common_dir = ROOT_APPS_DIR + '/web-apps-common'
+
+
+
+
 def add_to_log(applicacion, tmpDir, hostname):
     date_time = time.strftime('%Y\t%m\t%d\t%X')    
     outstr = '%s\t%s\t%s\t%s\n' % (applicacion, date_time, hostname, tmpDir)
