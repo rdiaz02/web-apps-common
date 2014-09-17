@@ -4,19 +4,33 @@ w3mPath = '/usr/bin/w3m'
 python_path = "/usr/bin/python"
 
 
+
 web_apps_common_dir = ROOT_APPS_DIR + '/web-apps-common'
+web_apps_mpi_error_log = web_apps_common_dir + "/log"
+web_apps_counter_log = web_apps_common_dir + "/log" + "/ApplicationCounter"
+web_apps_app_caught_error = web_apps_common_dir + "/log" + \
+                            "/app_caught_error"
 
 ## next unlikely to require changing, unless you want, of course
-num_procs = 63 ## For mpi
+
+
 MAX_MPI_CRASHES = 2 ## note we loop also in runAndCheck.py
 MAX_NUM_RELAUNCHES = 5 
-TIME_BETWEEN_CHECKS = 10
+TIME_BETWEEN_CHECKS = 2
 
 
 MAX_time = 3600 * 24 * 5 ## 5 is days until deletion of a tmp directory
 MAX_covariate_size = 363948523L ## a 500 * 40000 array of floats
 MAX_time_size = 61897L ## time to survival, class, etc size
 MAX_PERMUT = 90000000  ## maximum number of permutations
+
+
+num_procs_mpi = 63 ## For mpi
+hostfile_mpi = web_apps_common_dir + "/hostfile_Gallotia_4"
+# I disable openib, even if it works, as I was seeing it slower than tcp
+# and I am using a single node
+mpirun_command = "mpirun --mca btl ^openib -hostfile " + hostfile_mpi +\
+              " -np " + str(num_procs_mpi)
 
 
 
@@ -48,7 +62,7 @@ Pomelo_runningProcs= ROOT_POMELO_DIR + "/www/Pom.running.procs"
 Pomelo_cgi_dir      = ROOT_POMELO_DIR + "/cgi"
 pomelo_templates_dir = ROOT_POMELO_DIR + "/www/Pomelo2_html_templates"
 pomelo_running_procs_file_expression = Pomelo_runningProcs + "/Pom.*@*"
-buryPomCall = cgi_dir + "/buryPom.py"
+buryPomCall = Pomelo_cgi_dir + "/buryPom.py"
 
 #************  SELENIUM STUFF **************
 
