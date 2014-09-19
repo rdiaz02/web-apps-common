@@ -1,11 +1,11 @@
 ## Keep a counter of processes launched
-## We assume the file /http/log/ApplicationsCounter exists
+
 
 import time
 import fcntl
 import os
 import sys
-import cgitb; cgitb.enable()
+#import cgitb; cgitb.enable()
 sys.stderr = sys.stdout
 
 

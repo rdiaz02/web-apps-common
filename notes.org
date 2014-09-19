@@ -1,0 +1,6 @@
+* Testing, etc
+  - use RSelenium?
+    https://github.com/ropensci/RSelenium
+* Note in SignS
+  - this is outdated
+  - would also like to incorporate methods in Eng and Hanlon, 2014

@@ -1,11 +1,25 @@
-ROOT_APPS_DIR = "/web-apps"
+# Remember the set up: There is a ROOT_APPS_DIR, and from that, the rest
+# of things hang. That is not a relative path, because that ends up being
+# a PITA.  Most of the rest of the programs can change directories,
+# etc. But one thing that is hardwired in the paths is a web-apps-common
+# directory. Of course, you can change this, but then you will need to use
+# sed (or whatever else you fancy) on the files, and modify it. In
+# particular, some common python modules and files live there.
+
+# So even if these two lines are here, messing with them will get you
+# nowhere. You also need to change the paths in the individual .cgi and
+# .py files. Those that say "sys.path.append".
+ROOT_APPS_DIR = "/asterias-web-apps"
+web_apps_common_dir = ROOT_APPS_DIR + '/web-apps-common'
+
+
 R_bin = ROOT_APPS_DIR + '/R-3.1.1-patched-2014-08-21/bin/R'
 w3mPath = '/usr/bin/w3m'
 python_path = "/usr/bin/python"
 
 
 
-web_apps_common_dir = ROOT_APPS_DIR + '/web-apps-common'
+
 web_apps_mpi_error_log = web_apps_common_dir + "/log"
 web_apps_counter_log = web_apps_common_dir + "/log" + "/ApplicationCounter"
 web_apps_app_caught_error = web_apps_common_dir + "/log" + \
