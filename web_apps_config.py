@@ -29,8 +29,8 @@ web_apps_app_caught_error = web_apps_common_dir + "/log" + \
 
 
 MAX_MPI_CRASHES = 2 ## note we loop also in runAndCheck.py
-MAX_NUM_RELAUNCHES = 5 
-TIME_BETWEEN_CHECKS = 2
+MAX_NUM_RELAUNCHES = 1 
+TIME_BETWEEN_CHECKS = 0.5
 
 
 MAX_time = 3600 * 24 * 5 ## 5 is days until deletion of a tmp directory
@@ -55,13 +55,23 @@ mpirun_command = "mpirun --mca btl ^openib -hostfile " + hostfile_mpi +\
 ##########################################################
 
 MAX_poms = 10 ## Max number of pomelo2 running
-
+MAX_tnasas = 10 ## Max number of pomelo2 running
+MAX_genesrf = 10
+MAX_adacgh = 100 ## maybe this are R procs, not server procs?
+MAX_signs = 100
 
 ROOT_POMELO_DIR = ROOT_APPS_DIR + "/pomelo2"
 R_pomelo_bin = R_bin
 Pomelo_MAX_time = 3 * 3600 ## 3 hours is max duration allowd for any process
 pomelo_url = "http://pomelo2.iib.uam.es"
+R_MAX_time = 3600 * 4
 
+
+ROOT_POMELO_DIR = ROOT_APPS_DIR + "/pomelo2"
+R_pomelo_bin = R_bin
+pomelo_url = "http://pomelo2.iib.uam.es"
+
+R_tnasas_bin = R_bin
 
 
 
