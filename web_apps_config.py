@@ -36,6 +36,7 @@ TIME_BETWEEN_CHECKS = 0.5
 MAX_time = 3600 * 24 * 5 ## 5 is days until deletion of a tmp directory
 MAX_covariate_size = 363948523L ## a 500 * 40000 array of floats
 MAX_time_size = 61897L ## time to survival, class, etc size
+MAX_class_size = MAX_time_size
 MAX_PERMUT = 90000000  ## maximum number of permutations
 
 

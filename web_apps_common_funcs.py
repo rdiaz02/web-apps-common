@@ -1,5 +1,7 @@
 ## APP_NAME is defined in each app itself
 
+import os
+
 def commonOutput():
     print "Content-type: text/html\n\n"
     print """
@@ -46,7 +48,7 @@ def getBaseURL():
 
 
 
-def fileUpload(fieldName):
+def fileUpload(fieldName, fs, tmpDir):
     """Upload and get the files and do some checking. We assume there is an existing call
     to fs = cgi.FieldStorage()"""
 ## we don't deal with OS specific "\n"
@@ -97,7 +99,7 @@ def fileUpload(fieldName):
 
 
 
-def radioUpload(fieldName, acceptedValues):
+def radioUpload(fieldName, acceptedValues, fs, tmpDir):
     """Upload and get the values and do some checking. For radio selections
     with text data; check those are in acceptedValues.
     We assume there is an existing call to fs = cgi.FieldStorage()"""
@@ -149,7 +151,7 @@ def radioUpload(fieldName, acceptedValues):
 
 
 
-def dummyUpload(fieldName, value):
+def dummyUpload(fieldName, value, tmpDir):
     """We no longer read itype or organism, but those are needed in many places
     still."""
     
