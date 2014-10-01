@@ -1,8 +1,10 @@
 ## APP_NAME is defined in each app itself
 
 import os
+import shutil
+import sys
 
-def commonOutput():
+def commonOutput(APP_NAME):
     print "Content-type: text/html\n\n"
     print """
     <html>
@@ -48,7 +50,7 @@ def getBaseURL():
 
 
 
-def fileUpload(fieldName, fs, tmpDir):
+def fileUpload(fieldName, fs, tmpDir, APP_NAME):
     """Upload and get the files and do some checking. We assume there is an existing call
     to fs = cgi.FieldStorage()"""
 ## we don't deal with OS specific "\n"
@@ -59,7 +61,7 @@ def fileUpload(fieldName, fs, tmpDir):
         fileClient = fs[fieldName].file
         if not fileClient:
             shutil.rmtree(tmpDir)
-            commonOutput()
+            commonOutput(APP_NAME)
             print "<h1>  " + APP_NAME + "  INPUT ERROR </h1>"    
             print "<p> The ", fieldName, "file you entered is not a file </p>"
             print "<p> Please fill up the required fields and try again</p>"
@@ -67,7 +69,7 @@ def fileUpload(fieldName, fs, tmpDir):
             sys.exit()
     else:
         shutil.rmtree(tmpDir)
-        commonOutput()
+        commonOutput(APP_NAME)
         print "<h1>  " + APP_NAME + "  INPUT ERROR </h1>"    
         print "<p> ", fieldName, "file required </p>"
         print "<p> Please fill up the required fields and try again</p>"
@@ -87,7 +89,7 @@ def fileUpload(fieldName, fs, tmpDir):
         
     if os.path.getsize(fileInServer) == 0:
         shutil.rmtree(tmpDir)
-        commonOutput()
+        commonOutput(APP_NAME)
         print "<h1>  " + APP_NAME + "  INPUT ERROR </h1>"
         print "<p>", fieldName, " file has size 0 </p>"
         print "<p> Please enter a file with something in it.</p>"
@@ -99,14 +101,14 @@ def fileUpload(fieldName, fs, tmpDir):
 
 
 
-def radioUpload(fieldName, acceptedValues, fs, tmpDir):
+def radioUpload(fieldName, acceptedValues, fs, tmpDir, APP_NAME):
     """Upload and get the values and do some checking. For radio selections
     with text data; check those are in acceptedValues.
     We assume there is an existing call to fs = cgi.FieldStorage()"""
 
     if not fs.has_key(fieldName):
         shutil.rmtree(tmpDir)
-        commonOutput()
+        commonOutput(APP_NAME)
         print "<h1>  " + APP_NAME + "  ERROR </h1>"    
         print "<p>", fieldName, "required </p>"
         print "<p> Please fill up the required fields and try again</p>"
@@ -114,7 +116,7 @@ def radioUpload(fieldName, acceptedValues, fs, tmpDir):
         sys.exit()
     if fs[fieldName].filename:
         shutil.rmtree(tmpDir)
-        commonOutput()
+        commonOutput(APP_NAME)
         print "<h1>  " + APP_NAME + "  ERROR </h1>"    
         print "<p> ", fieldName, "should not be a file. </p>"
         print "<p> Please fill up the required fields and try again</p>"
@@ -122,7 +124,7 @@ def radioUpload(fieldName, acceptedValues, fs, tmpDir):
         sys.exit()
     if type(fs[fieldName]) == type([]):
         shutil.rmtree(tmpDir)
-        commonOutput()
+        commonOutput(APP_NAME)
         print "<h1>  " + APP_NAME + "  ERROR </h1>"    
         print "<p>", fieldName, "should be a single value.</p>"
         print "<p> Please fill up the required fields and try again</p>"
@@ -133,7 +135,7 @@ def radioUpload(fieldName, acceptedValues, fs, tmpDir):
             
     if tmp not in acceptedValues:
         shutil.rmtree(tmpDir)
-        commonOutput()
+        commonOutput(APP_NAME)
         print "<h1>  " + APP_NAME + "  ERROR </h1>"    
         print "<p> The", fieldName, "choosen is not valid.</p>"
         print "<p> Please fill up the required fields and try again.</p>"

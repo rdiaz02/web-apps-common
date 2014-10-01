@@ -59,7 +59,8 @@ MAX_poms = 10 ## Max number of pomelo2 running
 MAX_tnasas = 10 ## Max number of pomelo2 running
 MAX_genesrf = 10
 MAX_adacgh = 100 ## maybe this are R procs, not server procs?
-MAX_signs = 100
+MAX_signs = 5
+MAX_DURATION_TRY_Signs = 5 * 3600
 
 ROOT_POMELO_DIR = ROOT_APPS_DIR + "/pomelo2"
 R_pomelo_bin = R_bin
