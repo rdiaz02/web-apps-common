@@ -42,11 +42,15 @@ MAX_PERMUT = 90000000  ## maximum number of permutations
 
 num_procs_mpi = 63 ## For mpi
 hostfile_mpi = web_apps_common_dir + "/hostfile_Gallotia_4"
+hostfile_mpi_R = web_apps_common_dir + "/hostfile_Gallotia_4"
+
 # I disable openib, even if it works, as I was seeing it slower than tcp
 # and I am using a single node
 mpirun_command = "mpirun --mca btl ^openib -hostfile " + hostfile_mpi +\
               " -np " + str(num_procs_mpi)
 
+R_mpi_run = "mpirun --mca btl ^openib -np 1 --hostfile " + hostfile_mpi_R + \
+             R_bin + " --no-restore --no-readline --slave --no-save " 
 
 
 ##########################################################
