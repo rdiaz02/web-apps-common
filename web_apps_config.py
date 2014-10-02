@@ -42,7 +42,7 @@ MAX_PERMUT = 90000000  ## maximum number of permutations
 
 num_procs_mpi = 63 ## For mpi
 hostfile_mpi = web_apps_common_dir + "/hostfile_Gallotia_4"
-hostfile_mpi_R = web_apps_common_dir + "/hostfile_Gallotia_4"
+hostfile_mpi_R = web_apps_common_dir + "/hostfile_Gallotia_64"
 
 # I disable openib, even if it works, as I was seeing it slower than tcp
 # and I am using a single node
@@ -50,7 +50,7 @@ mpirun_command = "mpirun --mca btl ^openib -hostfile " + hostfile_mpi +\
               " -np " + str(num_procs_mpi)
 
 R_mpi_run = "mpirun --mca btl ^openib -np 1 --hostfile " + hostfile_mpi_R + \
-             R_bin + " --no-restore --no-readline --slave --no-save " 
+             " " + R_bin + " --no-restore --no-readline --slave --no-save " 
 
 
 ##########################################################
@@ -59,19 +59,22 @@ R_mpi_run = "mpirun --mca btl ^openib -np 1 --hostfile " + hostfile_mpi_R + \
 ##########################################################
 ##########################################################
 
+# These are really not max, but max + 1.
 MAX_poms = 10 ## Max number of pomelo2 running
-MAX_tnasas = 10 ## Max number of pomelo2 running
-MAX_genesrf = 10
-MAX_adacgh = 100 ## maybe this are R procs, not server procs?
+MAX_tnasas = 10  
+MAX_genesrf = 0 ## uses MPI and is slow. No point in having more.
+MAX_adacgh = 5 ## maybe this are R procs, not server procs?
 MAX_signs = 5
 MAX_DURATION_TRY_Signs = 5 * 3600
+MAX_DURATION_TRY_ADaCGH = 5 * 3600
+
 
 ROOT_POMELO_DIR = ROOT_APPS_DIR + "/pomelo2"
 R_pomelo_bin = R_bin
 Pomelo_MAX_time = 3 * 3600 ## 3 hours is max duration allowd for any process
 pomelo_url = "http://pomelo2.iib.uam.es"
 R_MAX_time = 3600 * 4
-
+MAX_DURATION_genesrf =  R_MAX_time
 
 ROOT_POMELO_DIR = ROOT_APPS_DIR + "/pomelo2"
 R_pomelo_bin = R_bin

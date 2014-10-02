@@ -17,6 +17,15 @@ application = sys.argv[3]
 sys.path.append("/asterias-web-apps/web-apps-common")
 from web_apps_config import *
 
+
+## This does not work really well. We do not clean up the sentinel
+## R.running.procs, for example. We should call again the checkdone.cgi
+## from the application, that does that job.
+
+
+sys.path.append("/asterias-web-apps/web-apps-common")
+from web_apps_config import *
+
 # numtries = 50 ## I redefine it here. for really stubborn cases
 
 
@@ -45,6 +54,13 @@ def collectZombies(k = 10):
             None
 
 
+def killAllRProcs(tmpDir):
+     pid = int(open(tmpDir + "/pid.txt", mode = "r").readline())
+     os.system("pkill --signal 9 -P " + str(pid))
+     os.system("kill -s 9 " + str(pid))
+
+
+            
 ## The following does not work. We would need to caputer the output
 ## from ps, and then get substring with -sessionsuffix and the number = lamSuffix.
 ## But killing lam kills all slaves and the main process
@@ -86,9 +102,10 @@ for i in range(int(numtries)):
 
     Rrun = os.system(fullRcommand)
     os.system('touch ' + tmpDir + '/first_Rrun') ## debug
-    time.sleep(100 + random.uniform(1, 12))
+    time.sleep(MAX_DURATION_genesrf + random.uniform(1, 12))
     collectZombies()
-
+    killAllRProcs(tmpDir)
+    
     if os.path.exists(tmpDir + "/RterminatedOK"):
         startedOK = True
         break
@@ -143,15 +160,17 @@ if not startedOK:
     out1.close()
     out2.close()
     outf = open(tmpDir + "/pre-results.html", mode = "w")
-    outf.write("<html><head><title> MPI initialization problem.</title></head><body>\n")
-    outf.write("<h1> MPI initialization problem.</h1>")
-    outf.write("<p> After " + numtries + " attempts we have been unable to ")
-    outf.write(" initialize MPI.</p>")
-    outf.write("<p> We will be notified of this error, but we would also ")
-    outf.write("appreciate if you can let us know of any circumstances or problems ")
-    outf.write("so we can diagnose the error.</p>")
+    outf.write("<html><head><title> Execution initialization problem.</title></head><body>\n")
+    outf.write("<h1> Execution problem.</h1>")
+    outf.write("<p> After " + numtries + " attempts" +\
+               "and/or " + MAX_DURATION_genesrf + " seconds we have been unable to ")
+    outf.write(" either initialize MPI or finish your job (might be too large).</p>")
+    # outf.write("<p> We will be notified of this error, but we would also ")
+    # outf.write("appreciate if you can let us know of any circumstances or problems ")
+    # outf.write("so we can diagnose the error.</p>")
     outf.write("</body></html>")
     outf.close()
     shutil.copyfile(tmpDir + "/pre-results.html", tmpDir + "/results.html")
+
 
 
