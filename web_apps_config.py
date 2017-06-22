@@ -14,6 +14,7 @@ web_apps_common_dir = ROOT_APPS_DIR + '/web-apps-common'
 
 
 R_bin = ROOT_APPS_DIR + '/R-3.1.1-patched-2014-08-21/bin/R'
+R_bin2 = ROOT_APPS_DIR + '/R-3.4.1-72824/bin/R'
 w3mPath = '/usr/bin/w3m'
 python_path = "/usr/bin/python"
 
@@ -33,15 +34,17 @@ MAX_NUM_RELAUNCHES = 1
 TIME_BETWEEN_CHECKS = 0.5
 
 
-MAX_time = 3600 * 24 * 5 ## 5 is days until deletion of a tmp directory
+MAX_time = 3600 * 24 * 15 ## 5 is days until deletion of a tmp directory
 MAX_covariate_size = 363948523L ## a 500 * 40000 array of floats
 MAX_time_size = 61897L ## time to survival, class, etc size
 MAX_class_size = MAX_time_size
 MAX_PERMUT = 90000000  ## maximum number of permutations
 
 
-num_procs_mpi = 63 ## For mpi
-hostfile_mpi = web_apps_common_dir + "/hostfile_Gallotia_4"
+num_procs_mpi = 4     ### Used to be 63 ## For mpi
+## I used to use that, but seems not to work with newer versions
+## hostfile_mpi = web_apps_common_dir + "/hostfile_Gallotia_4"
+hostfile_mpi = web_apps_common_dir + "/hostfile_Gallotia_64"
 hostfile_mpi_R = web_apps_common_dir + "/hostfile_Gallotia_64"
 
 # I disable openib, even if it works, as I was seeing it slower than tcp
@@ -49,8 +52,12 @@ hostfile_mpi_R = web_apps_common_dir + "/hostfile_Gallotia_64"
 mpirun_command = "mpirun --mca btl ^openib -hostfile " + hostfile_mpi +\
               " -np " + str(num_procs_mpi)
 
+## Using MPI is a real PITA. Try to avoid it.
+## Only genesrf was using it. Trying newer R with forking (no snow)
 R_mpi_run = "mpirun --mca btl ^openib -np 1 --hostfile " + hostfile_mpi_R + \
              " " + R_bin + " --no-restore --no-readline --slave --no-save " 
+
+R_no_mpi_run = R_bin2 + " --no-restore --no-readline --slave --no-save " 
 
 
 ##########################################################
@@ -60,14 +67,14 @@ R_mpi_run = "mpirun --mca btl ^openib -np 1 --hostfile " + hostfile_mpi_R + \
 ##########################################################
 
 # These are really not max, but max + 1.
-MAX_poms = 10 ## Max number of pomelo2 running
-MAX_tnasas = 10  
-MAX_genesrf = 0 ## uses MPI and is slow. No point in having more.
-MAX_adacgh = 5 ## maybe this are R procs, not server procs?
-MAX_signs = 5
+MAX_poms = 3 ## Max number of pomelo2 running
+MAX_tnasas = 3  
+MAX_genesrf = 1 ## uses MPI and is slow. No point in having more.
+MAX_adacgh = 3 ## maybe this are R procs, not server procs?
+MAX_signs = 3
 MAX_DURATION_TRY_Signs = 5 * 3600
 MAX_DURATION_TRY_ADaCGH = 5 * 3600
-
+## the file f1-pomelo.R contains also a number, numcores, for cores for Cox
 
 ROOT_POMELO_DIR = ROOT_APPS_DIR + "/pomelo2"
 R_pomelo_bin = R_bin

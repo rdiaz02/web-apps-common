@@ -94,7 +94,11 @@ for i in range(int(numtries)):
 
     # fullRcommand = 'export LAM_MPI_SESSION_SUFFIX="' + lamSuffix + '";' + '/usr/bin/lamboot -b -H /http/mpi.defs/lamb-host.' + socket.gethostname() + '.def; cd ' + tmpDir + '; sleep 40;' + '/var/www/bin/R-local-7-LAM-MPI/bin/R  --no-restore --no-readline --no-save --slave <f1.R >>f1.Rout 2> error.msg &'
 
-    fullRcommand = 'cd ' + tmpDir + '; ' + R_mpi_run +\
+    ## Trying to avoid MPI
+    # fullRcommand = 'cd ' + tmpDir + '; ' + R_mpi_run +\
+    #                '<f1.R >>f1.Rout 2> error.msg &'
+
+    fullRcommand = 'cd ' + tmpDir + '; ' + R_no_mpi_run +\
                    '<f1.R >>f1.Rout 2> error.msg &'
 
     # counterApplications.add_to_LAM_SUFFIX_LOG(lamSuffix, application, tmpDir,
