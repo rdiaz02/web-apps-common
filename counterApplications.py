@@ -48,9 +48,9 @@ def add_to_LAM_SUFFIX_LOG(lamSuffix, application, tmpDir, hostname,
 
 # def add_to_LAM_SUFFIX_LOG(lamSuffix, application, tmpDir, hostname,
 #                           Rprocess = 'RprocessPid'):
-#     if not os.path.exists('/asterias-web-apps/mpi.log/LAM_SUFFIX_Log'):
-#         os.system('touch /asterias-web-apps/mpi.log/LAM_SUFFIX_Log')
-#     outlog = open('/asterias-web-apps/mpi.log/LAM_SUFFIX_Log', mode = 'a')
+#     if not os.path.exists('/home2/ramon/web-apps/mpi.log/LAM_SUFFIX_Log'):
+#         os.system('touch /home2/ramon/web-apps/mpi.log/LAM_SUFFIX_Log')
+#     outlog = open('/home2/ramon/web-apps/mpi.log/LAM_SUFFIX_Log', mode = 'a')
 #     fcntl.flock(outlog.fileno(), fcntl.LOCK_SH)
 #     outlog.write(Rprocess + '\t' + lamSuffix + '\t' +
 #                  hostname + '\t' + 

@@ -9,12 +9,14 @@
 # So even if these two lines are here, messing with them will get you
 # nowhere. You also need to change the paths in the individual .cgi and
 # .py files. Those that say "sys.path.append".
-ROOT_APPS_DIR = "/asterias-web-apps"
+ROOT_APPS_DIR = "/home2/ramon/web-apps"
 web_apps_common_dir = ROOT_APPS_DIR + '/web-apps-common'
 
 
-R_bin = ROOT_APPS_DIR + '/R-3.1.1-patched-2014-08-21/bin/R'
-R_bin2 = ROOT_APPS_DIR + '/R-3.4.1-72824/bin/R'
+## R_bin = ROOT_APPS_DIR + '/R-3.1.1-patched-2014-08-21/bin/R'
+R_bin = ROOT_APPS_DIR + '/R-4.5.1-patched-config-as-mine/bin/R'
+## R_bin2 = ROOT_APPS_DIR + '/R-3.4.1-72824/bin/R'
+R_bin2 = R_bin
 w3mPath = '/usr/bin/w3m'
 python_path = "/usr/bin/python"
 
@@ -30,7 +32,7 @@ web_apps_app_caught_error = web_apps_common_dir + "/log" + \
 
 
 MAX_MPI_CRASHES = 2 ## note we loop also in runAndCheck.py
-MAX_NUM_RELAUNCHES = 1 
+MAX_NUM_RELAUNCHES = 1
 TIME_BETWEEN_CHECKS = 0.5
 
 
@@ -49,15 +51,17 @@ hostfile_mpi_R = web_apps_common_dir + "/hostfile_Gallotia_64"
 
 # I disable openib, even if it works, as I was seeing it slower than tcp
 # and I am using a single node
-mpirun_command = "mpirun --mca btl ^openib -hostfile " + hostfile_mpi +\
-              " -np " + str(num_procs_mpi)
+mpirun_command = "mpirun -np " + str(num_procs_mpi)
+
+# mpirun_command = "mpirun --mca btl ^openib -hostfile " + hostfile_mpi +\
+#               " -np " + str(num_procs_mpi)
 
 ## Using MPI is a real PITA. Try to avoid it.
 ## Only genesrf was using it. Trying newer R with forking (no snow)
-R_mpi_run = "mpirun --mca btl ^openib -np 1 --hostfile " + hostfile_mpi_R + \
-             " " + R_bin + " --no-restore --no-readline --slave --no-save " 
+# R_mpi_run = "mpirun --mca btl ^openib -np 1 --hostfile " + hostfile_mpi_R + \
+#              " " + R_bin + " --no-restore --no-readline --slave --no-save "
 
-R_no_mpi_run = R_bin2 + " --no-restore --no-readline --slave --no-save " 
+R_no_mpi_run = R_bin2 + " --no-restore --no-readline --slave --no-save "
 
 
 ##########################################################
@@ -68,7 +72,7 @@ R_no_mpi_run = R_bin2 + " --no-restore --no-readline --slave --no-save "
 
 # These are really not max, but max + 1.
 MAX_poms = 3 ## Max number of pomelo2 running
-MAX_tnasas = 3  
+MAX_tnasas = 3
 MAX_genesrf = 1 ## uses MPI and is slow. No point in having more.
 MAX_adacgh = 3 ## maybe this are R procs, not server procs?
 MAX_signs = 3
@@ -83,9 +87,6 @@ pomelo_url = "http://pomelo2.iib.uam.es"
 R_MAX_time = 3600 * 4
 MAX_DURATION_genesrf =  R_MAX_time
 
-ROOT_POMELO_DIR = ROOT_APPS_DIR + "/pomelo2"
-R_pomelo_bin = R_bin
-pomelo_url = "http://pomelo2.iib.uam.es"
 
 R_tnasas_bin = R_bin
 
@@ -110,4 +111,3 @@ Pomelo_covariate_sel_file = ROOT_POMELO_DIR + "/www/selenium-core-0.7.1/TEST_DAT
 Pomelo_class_lab_sel_file = ROOT_POMELO_DIR + "/www/selenium-core-0.7.1/TEST_DATA/CLASS_LABELS_Anova-limma"
 Pomelo_covariable_sel_file = ROOT_POMELO_DIR + "/www/selenium-core-0.7.1/TEST_DATA/covariables.anova"
 Pomelo_examples_data_dir  = ROOT_POMELO_DIR + "/www/Examples/Data"
-

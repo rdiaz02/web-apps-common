@@ -14,7 +14,7 @@ application = sys.argv[3]
 
 ## This uses MPI! It is called, at least, from genesrf.
 
-sys.path.append("/asterias-web-apps/web-apps-common")
+sys.path.append("/home2/ramon/web-apps/web-apps-common")
 from web_apps_config import *
 
 
@@ -23,7 +23,7 @@ from web_apps_config import *
 ## from the application, that does that job.
 
 
-sys.path.append("/asterias-web-apps/web-apps-common")
+sys.path.append("/home2/ramon/web-apps/web-apps-common")
 from web_apps_config import *
 
 # numtries = 50 ## I redefine it here. for really stubborn cases
