@@ -32,7 +32,9 @@ web_apps_app_caught_error = web_apps_common_dir + "/log" + \
 
 
 MAX_MPI_CRASHES = 2 ## note we loop also in runAndCheck.py
-MAX_NUM_RELAUNCHES = 1
+## MAX_NUM_RELAUNCHES = 1
+## zz-new-checks-runs 2025-09
+MAX_NUM_RELAUNCHES = 0
 TIME_BETWEEN_CHECKS = 0.5
 
 
@@ -86,7 +88,7 @@ Pomelo_MAX_time = 3 * 3600 ## 3 hours is max duration allowd for any process
 pomelo_url = "http://pomelo2.iib.uam.es"
 R_MAX_time = 3600 * 4
 MAX_DURATION_genesrf =  R_MAX_time
-
+Pomelo_MAX_for_clean = 240 ## 4 * 60 minutes
 
 R_tnasas_bin = R_bin
 
