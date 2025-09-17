@@ -31,11 +31,11 @@ web_apps_app_caught_error = web_apps_common_dir + "/log" + \
 ## next unlikely to require changing, unless you want, of course
 
 
-MAX_MPI_CRASHES = 2 ## note we loop also in runAndCheck.py
 ## MAX_NUM_RELAUNCHES = 1
 ## zz-new-checks-runs 2025-09
 MAX_NUM_RELAUNCHES = 0
 TIME_BETWEEN_CHECKS = 0.5
+MAX_MPI_CRASHES = 0 ## note we loop also in runAndCheck.py
 
 
 MAX_time = 3600 * 24 * 15 ## 5 is days until deletion of a tmp directory
@@ -85,10 +85,10 @@ MAX_DURATION_TRY_ADaCGH = 5 * 3600
 ROOT_POMELO_DIR = ROOT_APPS_DIR + "/pomelo2"
 R_pomelo_bin = R_bin
 Pomelo_MAX_time = 3 * 3600 ## 3 hours is max duration allowd for any process
-pomelo_url = "http://pomelo2.iib.uam.es"
-R_MAX_time = 3600 * 4
+R_MAX_time = 3 * 3600
 MAX_DURATION_genesrf =  R_MAX_time
-Pomelo_MAX_for_clean = 240 ## 4 * 60 minutes
+pomelo_url = "http://pomelo2.iib.uam.es"
+
 
 R_tnasas_bin = R_bin
 
