@@ -14,7 +14,7 @@ web_apps_common_dir = ROOT_APPS_DIR + '/web-apps-common'
 
 
 ## R_bin = ROOT_APPS_DIR + '/R-3.1.1-patched-2014-08-21/bin/R'
-R_bin = ROOT_APPS_DIR + '/R-4.5.1-patched-config-as-mine/bin/R'
+R_bin = ROOT_APPS_DIR + '/R-4.5.1-patched/bin/R'
 ## R_bin2 = ROOT_APPS_DIR + '/R-3.4.1-72824/bin/R'
 R_bin2 = R_bin
 w3mPath = '/usr/bin/w3m'
@@ -38,7 +38,7 @@ TIME_BETWEEN_CHECKS = 0.5
 MAX_MPI_CRASHES = 0 ## note we loop also in runAndCheck.py
 
 
-MAX_time = 3600 * 24 * 15 ## 5 is days until deletion of a tmp directory
+MAX_time = 3600 * 24 * 5 ## 5 is days until deletion of a tmp directory
 MAX_covariate_size = 363948523L ## a 500 * 40000 array of floats
 MAX_time_size = 61897L ## time to survival, class, etc size
 MAX_class_size = MAX_time_size
@@ -78,8 +78,8 @@ MAX_tnasas = 3
 MAX_genesrf = 1 ## uses MPI and is slow. No point in having more.
 MAX_adacgh = 3 ## maybe this are R procs, not server procs?
 MAX_signs = 3
-MAX_DURATION_TRY_Signs = 5 * 3600
-MAX_DURATION_TRY_ADaCGH = 5 * 3600
+MAX_DURATION_TRY_Signs = 3 * 3600
+MAX_DURATION_TRY_ADaCGH = 3 * 3600
 ## the file f1-pomelo.R contains also a number, numcores, for cores for Cox
 
 ROOT_POMELO_DIR = ROOT_APPS_DIR + "/pomelo2"
@@ -88,6 +88,9 @@ Pomelo_MAX_time = 3 * 3600 ## 3 hours is max duration allowd for any process
 R_MAX_time = 3 * 3600
 MAX_DURATION_genesrf =  R_MAX_time
 pomelo_url = "http://pomelo2.iib.uam.es"
+Signs_MAX_time = Pomelo_MAX_time
+Tnasas_MAX_time = Pomelo_MAX_time
+Genesrf_MAX_time = Pomelo_MAX_time
 
 
 R_tnasas_bin = R_bin
